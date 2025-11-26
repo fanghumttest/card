@@ -83,15 +83,16 @@ button.is-button-locked {
 
 /* --- 背景影片專用設定 Start --- */
 
-/* 1. 設定影片全螢幕置底 */
 #bg-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 關鍵：確保影片不變形並填滿螢幕 */
-  z-index: 0;        /* 放在最底層 */
+  object-fit: cover; 
+  z-index: 0;
+  transform: scale(1.06);    
+  transform-origin: center;
 }
 
 /* 2. 修正 .stage：移除原本的靜態背景圖 */
