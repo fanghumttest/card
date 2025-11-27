@@ -823,7 +823,7 @@ button.is-button-locked {
 
     box-shadow: none;
 
-    padding-top: 0.5rem; /* 增加文字區域上方間距，與圖片區域分開 */
+    padding-top: 1.5rem; /* 增加文字區域上方間距，與圖片區域分開 */
 
   }
 
