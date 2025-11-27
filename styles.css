@@ -827,6 +827,15 @@ button.is-button-locked {
 
   }
 
+  .panel-text .eyebrow {
+    margin-bottom: 0.15rem; /* 原本繼承全域設定約 1rem，這裡大幅縮小 */
+  }
+
+  /* 確保主標題上方沒有多餘邊距 (通常預設就是 0，加個保險) */
+  .panel-text h2 {
+    margin-top: 0;
+  }
+
   .screen[data-screen="screen-03"] .panel-text .actions {
 
     margin-top: 1.5rem;
