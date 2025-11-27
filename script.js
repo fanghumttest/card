@@ -12,7 +12,7 @@ let currentCard = null;
 let isDrawing = false;
 
 const cardPool = Array.from({ length: 31 }, (_, i) => ({
-  image: `img/card/cardFront- (${i + 1}).png`,
+  image: `img/card/cardFront-${i + 1}.png`,
   quote: "修道真言",
 }));
 
