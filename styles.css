@@ -1287,6 +1287,26 @@ button.is-button-locked {
   pointer-events: none; 
 }
 
+/* --- 新增以下 CSS --- */
+
+/* 設定宣告文字：極淡、稍微縮小、融合背景 */
+.copyright span {
+  display: inline-block;     /* 必須設為區塊才能縮放 */
+  font-size: 12px;           /* 保持機器可讀的正常字體大小 */
+  transform: scale(0.7);     /* 視覺上縮小至 70% */
+  opacity: 0.2;              /* 透明度 20%，非常不明顯 */
+  margin-top: 2px;
+  mix-blend-mode: multiply;  /* 讓文字色彩融入背景，看起來像浮水印 */
+  transition: opacity 0.3s ease; /* 增加漸變動畫 */
+}
+
+/* 當滑鼠移到版權宣告上時，讓文字變清楚 */
+.copyright:hover span {
+  opacity: 0.8;              /* 恢復到 80% 可見度 */
+}
+
+/* ------------------ */
+
 @media (max-width: 768px) {
   .copyright {
     display: none;
