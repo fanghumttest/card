@@ -257,16 +257,15 @@ deck.addEventListener("keypress", (event) => {
 
 saveBtn.addEventListener("click", async () => {
   if (!currentCard) return;
-  const numMatch = String(currentCard.image || "").match(/cardFront-(\d+)/);
-  const cardNum =
-    typeof currentCard.number === "number"
-      ? currentCard.number
-      : numMatch
-        ? Number(numMatch[1])
-        : 0;
-  const downloadName = cardNum
-    ? `修道真言-${cardNum}.png`
-    : "修道真言.png";
+  const pathMatch = String(currentCard.image || "").match(/cardFront-(\d+)/i);
+  const fromPath = pathMatch ? parseInt(pathMatch[1], 10) : 0;
+  const fromDraw =
+    Number.isFinite(currentCard.number) && currentCard.number > 0
+      ? Math.trunc(currentCard.number)
+      : 0;
+  const cardIndex = fromDraw || fromPath;
+  const downloadName =
+    cardIndex > 0 ? `修道真言-${cardIndex}.png` : "修道真言.png";
 
   const img = new Image();
   img.decoding = "async";
