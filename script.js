@@ -255,17 +255,56 @@ deck.addEventListener("keypress", (event) => {
   }
 });
 
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener("click", async () => {
   if (!currentCard) return;
-  const link = document.createElement("a");
-  link.href = currentCard.image;
-  const fileName = (currentCard.quote || resultMessage)
+  const baseName = (currentCard.quote || resultMessage)
     .slice(0, 10)
     .replace(/\s+/g, "");
-  link.download = `修道真言-${fileName || "card"}.png`;
+  const downloadName = `修道真言-${baseName || "card"}.png`;
+
+  const img = new Image();
+  img.decoding = "async";
+
+  try {
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = () => reject(new Error("image load failed"));
+      img.src = currentCard.image;
+    });
+  } catch {
+    const link = document.createElement("a");
+    link.href = currentCard.image;
+    link.download = downloadName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    return;
+  }
+
+  const w = img.naturalWidth;
+  const h = img.naturalHeight;
+  if (!w || !h) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  ctx.drawImage(img, 0, 0);
+
+  const blob = await new Promise((resolve) => {
+    canvas.toBlob((b) => resolve(b), "image/png");
+  });
+  if (!blob) return;
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = downloadName;
   document.body.appendChild(link);
   link.click();
   link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 });
 
 // 圖片保護程式碼
