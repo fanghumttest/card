@@ -109,7 +109,7 @@ const triggerDraw = () => {
   }
   // ==========================================
 
-  currentCard = chosen;
+  currentCard = { ...chosen, number: chosenIndex + 1 };
   
   if (flipCardFront) {
     flipCardFront.src = chosen.image;
@@ -257,10 +257,16 @@ deck.addEventListener("keypress", (event) => {
 
 saveBtn.addEventListener("click", async () => {
   if (!currentCard) return;
-  const baseName = (currentCard.quote || resultMessage)
-    .slice(0, 10)
-    .replace(/\s+/g, "");
-  const downloadName = `修道真言-${baseName || "card"}.png`;
+  const numMatch = String(currentCard.image || "").match(/cardFront-(\d+)/);
+  const cardNum =
+    typeof currentCard.number === "number"
+      ? currentCard.number
+      : numMatch
+        ? Number(numMatch[1])
+        : 0;
+  const downloadName = cardNum
+    ? `修道真言-${cardNum}.png`
+    : "修道真言.png";
 
   const img = new Image();
   img.decoding = "async";
