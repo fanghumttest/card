@@ -13,7 +13,7 @@ let isDrawing = false;
 
 // 1. 設定卡片池為 60 張
 const cardPool = Array.from({ length: 60 }, (_, i) => ({
-  image: `img/card/cardFront-${i + 1}.png`,
+  image: `img/card/cardFront-${i + 1}.webp`,
   quote: "修道真言", // 如果之後想針對每張卡寫不同籤詩，可以在這裡擴充
 }));
 
@@ -104,7 +104,7 @@ const triggerDraw = () => {
   if (typeof gtag === 'function') {
       gtag('event', 'card_drawn', {
           'card_number': chosenIndex + 1,        // 例如：58
-          'card_filename': `cardFront-${chosenIndex + 1}.png` // 例如：cardFront-58.png
+          'card_filename': `cardFront-${chosenIndex + 1}.webp` // 例如：cardFront-58.webp
       });
   }
   // ==========================================
